@@ -1,21 +1,23 @@
-package org.hackatron.hackatronapp;
+package org.hackatron.hackatronapp.examples;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import org.hackatron.hackatronapp.R;
 
 
-public class MainActivity extends Activity
+public class ExampleListActivity extends Activity
 {
+    static final String[] papers = new String[] {
+            "All you need is a Docker container", "Hashkell", "Arduino Tutorial", "Android 101",
+            "Parse", "DEFCON Level Indicator",
+            "abc", "def", "ghi", "jkl", "mno", "pqrst", "uvw", "xyz"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -23,7 +25,7 @@ public class MainActivity extends Activity
 
         setContentView(R.layout.activity_main);
 
-        PaperAdapter adapter = new PaperAdapter(this);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, papers);
         final ListView listView = (ListView) findViewById(R.id.main_list);
         listView.setAdapter(adapter);
     }
@@ -45,12 +47,7 @@ public class MainActivity extends Activity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-
-        if (id == R.id.action_create) {
-            // TODO open create activity
-            return true;
-        }
-
+        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
