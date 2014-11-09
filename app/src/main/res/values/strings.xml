@@ -4,7 +4,7 @@
     <string name="app_name">HackatronApp</string>
     <string name="hello_world">Hello world!</string>
 
-    <string name="action_create">+</string>
+    <string name="action_create">NEW</string>
     <string name="action_settings">Settings</string>
 
 </resources>
