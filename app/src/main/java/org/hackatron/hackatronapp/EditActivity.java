@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 public class EditActivity extends Activity
 {
+    // Expose custom results
     public static final int RESULT_UPDATE = RESULT_FIRST_USER + 1;
     public static final int RESULT_DELETE = RESULT_FIRST_USER + 2;
 

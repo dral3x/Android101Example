@@ -97,7 +97,7 @@ public class MainActivity extends Activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (requestCode == REQUEST_CREATE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_CREATE && resultCode == RESULT_OK && data != null) {
             Log.i(LOG_TAG, "onActivityResult CREATE");
 
             String text = data.getStringExtra("todo");
@@ -105,7 +105,7 @@ public class MainActivity extends Activity
             return;
         }
 
-        if (requestCode == REQUEST_EDIT) {
+        if (requestCode == REQUEST_EDIT && data != null) {
             String original = data.getStringExtra("todo");
             String updated = data.getStringExtra("todo_updated");
 
@@ -130,7 +130,6 @@ public class MainActivity extends Activity
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
         {
             // Open edit activity
-
             String todo = (String) _adapter.getItem(i);
             Intent create = new Intent(MainActivity.this, EditActivity.class);
             create.putExtra("todo", todo);
