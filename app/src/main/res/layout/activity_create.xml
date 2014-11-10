@@ -19,6 +19,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
         android:text="CREATE"
-        style="@style/Button"/>
+        style="@style/MyButton"/>
 
 </LinearLayout>

@@ -19,7 +19,7 @@
         android:layout_gravity="center_horizontal"
         android:text="UPDATE"
         android:layout_margin="10dp"
-        style="@style/Button"/>
+        style="@style/MyButton"/>
 
     <Button
         android:id="@+id/edit_delete"
@@ -27,6 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="DELETE"
-        style="@style/Button.Red"/>
+        style="@style/MyButton.Red"/>
 
 </LinearLayout>
