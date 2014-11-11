@@ -10,6 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 
@@ -21,7 +24,7 @@ public class MainActivity extends Activity
     private static final int REQUEST_CREATE = 0;
     private static final int REQUEST_EDIT = 1;
 
-    private TodoAdapter _adapter = new TodoAdapter();
+    private BaseAdapter _adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,6 +32,8 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        this._adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new String[] { "say something nice", "eat something", "drink less" });
 
         ListView listView = (ListView) findViewById(R.id.main_list);
         listView.setAdapter(this._adapter);
@@ -41,71 +46,41 @@ public class MainActivity extends Activity
 
         Log.i(LOG_TAG, "onStart");
 
-        // Restore adapter content
+        /*// Restore adapter content
         SharedPreferences preferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
         String encodedData = preferences.getString("adapter_content", null);
         Bundle bundle = SerializationUtil.decodeBundle(encodedData);
 
-        this._adapter.restoreInstanceState(bundle);
+        this._adapter.restoreInstanceState(bundle);*/
     }
 
     protected void onStop()
     {
         Log.i(LOG_TAG, "onStop");
 
-        // Save adapter content
+        /*// Save adapter content
         Bundle bundle = new Bundle();
         this._adapter.saveInstanceState(bundle);
 
         SharedPreferences.Editor editor = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE).edit();
         editor.putString("adapter_content", SerializationUtil.encodeBundle(bundle));
-        editor.commit();
+        editor.commit();*/
 
         super.onStop();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-
-        if (id == R.id.action_create) {
-
-            // Open create activity
-            Log.i(LOG_TAG, "Opening create todo");
-            Intent create = new Intent(this, CreateActivity.class);
-            startActivityForResult(create, REQUEST_CREATE);
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (requestCode == REQUEST_CREATE && resultCode == RESULT_OK && data != null) {
+        /*if (requestCode == REQUEST_CREATE && resultCode == RESULT_OK && data != null) {
             Log.i(LOG_TAG, "onActivityResult CREATE");
 
             String text = data.getStringExtra("todo");
             this._adapter.add(text);
             return;
-        }
+        }*/
 
-        if (requestCode == REQUEST_EDIT && data != null) {
+        /*if (requestCode == REQUEST_EDIT && data != null) {
             String original = data.getStringExtra("todo");
             String updated = data.getStringExtra("todo_updated");
 
@@ -119,9 +94,26 @@ public class MainActivity extends Activity
                 this._adapter.remove(original);
             }
             return;
-        }
+        }*/
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void _openCreateActivity()
+    {
+        Log.i(LOG_TAG, "Opening create todo");
+        Intent create = new Intent(this, CreateActivity.class);
+        startActivityForResult(create, REQUEST_CREATE);
+    }
+
+    private class CreateOnClickListener implements View.OnClickListener
+    {
+        @Override
+        public void onClick(View view)
+        {
+            // Open create activity
+            _openCreateActivity();
+        }
     }
 
     private class TodoOnClickListener implements ListView.OnItemClickListener
@@ -129,11 +121,13 @@ public class MainActivity extends Activity
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
         {
-            // Open edit activity
+            Log.i(LOG_TAG, "Selected " + _adapter.getItem(i));
+
+            /*// Open edit activity
             String todo = (String) _adapter.getItem(i);
             Intent create = new Intent(MainActivity.this, EditActivity.class);
             create.putExtra("todo", todo);
-            startActivityForResult(create, REQUEST_EDIT);
+            startActivityForResult(create, REQUEST_EDIT);*/
         }
     }
 }

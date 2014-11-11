@@ -50,7 +50,7 @@ public class TodoAdapter extends BaseAdapter
         this.notifyDataSetChanged();
     }
 
-    public void saveInstanceState(Bundle outState)
+    /*public void saveInstanceState(Bundle outState)
     {
         outState.putSerializable(STATE_KEY, this._content);
     }
@@ -62,7 +62,7 @@ public class TodoAdapter extends BaseAdapter
         }
 
         this.notifyDataSetChanged();
-    }
+    }*/
 
     @Override
     public int getCount()
